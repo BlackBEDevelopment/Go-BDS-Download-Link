@@ -18,6 +18,7 @@ func GetBDSDownloadLink() (string, string, error) {
 	if err != nil {
 		return "", "", err
 	}
+	defer Body.Close()
 
 	//解析数据
 	doc, err := htmlquery.Parse(Body)
@@ -68,7 +69,6 @@ func GetBDSDownloadPage() (io.ReadCloser, error) {
 	if err != nil {
 		return Body, err
 	}
-	defer res.Body.Close()
 
 	//解压数据
 	Body, err = gzip.NewReader(res.Body)
