@@ -17,7 +17,7 @@ import (
 )
 
 func main() {
-	DownloadLink, Version, err := BDSDownloadLink.GetBDSDownloadLink()
+	DownloadLink, Version, err := BDSDownloadLink.GetWindows()
 	if err != nil {
 		fmt.Println(err)
 		return
