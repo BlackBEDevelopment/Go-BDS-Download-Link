@@ -12,8 +12,14 @@ import (
 	"github.com/antchfx/htmlquery"
 )
 
-//获取BDS下载链接和最新版本号
-func GetBDSDownloadLink() (string, string, error) {
+/**
+ * @description: 获取Windows版本下载链接
+ * @param {*}
+ * @return {string} 下载链接
+ * @return {string} 版本号
+ * @return {error}
+ */
+func GetWindows() (string, string, error) {
 	Body, err := GetBDSDownloadPage()
 	if err != nil {
 		return "", "", err
@@ -26,6 +32,39 @@ func GetBDSDownloadLink() (string, string, error) {
 		return "", "", err
 	}
 	ALabel := htmlquery.Find(doc, `//*[@id="main-content"]/div/div/div/div/div/div/div[1]/div[2]/div/div/div[1]/div[3]/div/a/@href`)
+
+	DownloadLink := htmlquery.InnerText(ALabel[0])
+
+	//从文件名提取版本号
+	_, fileName := filepath.Split(DownloadLink)
+	fileExt := path.Ext(DownloadLink)
+	fileName = strings.TrimRight(fileName, fileExt)
+	FileNameSplit := strings.Split(fileName, "-")
+	Version := FileNameSplit[2]
+
+	return DownloadLink, Version, err
+}
+
+/**
+ * @description: 获取Ubuntu版本下载链接
+ * @param {*}
+ * @return {string} 下载链接
+ * @return {string} 版本号
+ * @return {error}
+ */
+func GetUbuntu() (string, string, error) {
+	Body, err := GetBDSDownloadPage()
+	if err != nil {
+		return "", "", err
+	}
+	defer Body.Close()
+
+	//解析数据
+	doc, err := htmlquery.Parse(Body)
+	if err != nil {
+		return "", "", err
+	}
+	ALabel := htmlquery.Find(doc, `//*[@id="main-content"]/div/div/div[1]/div/div/div/div[1]/div[2]/div/div/div[2]/div[3]/div/a/@href`)
 
 	DownloadLink := htmlquery.InnerText(ALabel[0])
 
