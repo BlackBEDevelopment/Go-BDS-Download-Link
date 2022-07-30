@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2021-12-28 20:54:59
- * @LastEditTime: 2022-07-30 23:51:36
+ * @LastEditTime: 2022-07-30 23:56:06
  * @LastEditors: NyanCatda
  * @Description: 获取BDS最新版本下载链接和版本号
  * @FilePath: \Go-BDS-Download-Link\BDSDownloadLink.go
@@ -71,7 +71,7 @@ func GetUbuntu() (string, string, error) {
 	if err != nil {
 		return "", "", err
 	}
-	ALabel := htmlquery.Find(doc, `//*[@id="main-content"]/div/div/div[1]/div/div/div/div[1]/div[2]/div/div/div[2]/div[3]/div/a/@href`)
+	ALabel := htmlquery.Find(doc, `//*[@id="main-content"]/div/div/div[1]/div/div/div/div[2]/div/div/div/div[2]/div[3]/div/a/@href`)
 
 	DownloadLink := htmlquery.InnerText(ALabel[0])
 
