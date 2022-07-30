@@ -2,7 +2,10 @@ module github.com/BlackBEDevelopment/Go-BDS-Download-Link
 
 go 1.17
 
-require github.com/antchfx/htmlquery v1.2.4
+require (
+	github.com/antchfx/htmlquery v1.2.4
+	github.com/nyancatda/HttpRequest v1.0.4
+)
 
 require (
 	github.com/antchfx/xpath v1.2.0 // indirect
